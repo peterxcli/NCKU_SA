@@ -96,8 +96,6 @@ for input_file in "${input_files[@]}"; do
   # Determine file format
   if grep -q '{' "$input_file"; then
     # JSON file
-    #users=($(jq -r '.[]' "$input_file"))
-    users=($(jq -r '.[]' "$input_file"))
     length=($(jq -r '. | length' data.json))
     for (( i=0; i<length; i++ )); do
       usernames+=($(jq -r ".[$i].username" "$input_file"))
