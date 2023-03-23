@@ -1,0 +1,23 @@
+[
+    {
+        "username": "admin_cat",
+        "password": "cat001",
+        "shell": "/bin/sh",
+        "groups": [
+            "wheel",
+            "operator"
+        ]
+    },
+    {
+        "username": "meow_2",
+        "password": "cat002",
+        "shell": "/bin/tcsh",
+        "groups": []
+    },
+    {
+        "username": "meow_3",
+        "password": "cat003",
+        "shell": "/bin/csh",
+        "groups": []
+    }
+]
