@@ -68,7 +68,7 @@ fi
 # Validate input files with MD5 hashes
 if [[ ${#md5[@]} -gt 0 ]]; then
   for ((i = 0; i < ${#input_files[@]}; i++)); do
-    _md5=($(md5sum ${input_files[$i]}))
+    _md5=$(md5sum "${input_files[$i]}")
     if ! [ "$_md5" = "${md5[$i]}" ]; then
       echo >&2 "Error: Invalid checksum."
       exit 1
@@ -79,7 +79,7 @@ fi
 # Validate input files with SHA256 hashes
 if [[ ${#sha256[@]} -gt 0 ]]; then
   for ((i = 0; i < ${#input_files[@]}; i++)); do
-    _sha256=($(sha256sum ${input_files[$i]}))
+    _sha256=$(sha256sum "${input_files[$i]}")
     if ! [ "$_sha256" = "${sha256[$i]}" ]; then
       echo >&2 "Error: Invalid checksum."
       exit 1
@@ -94,27 +94,36 @@ shells=()
 groups=()
 for input_file in "${input_files[@]}"; do
   # Determine file format
-  file_type=$(file $input_file | awk '{print $2}')
-  if [ $file_type = "JSON" ]; then
-    length=($(jq -r '. | length' "$input_file"))
+  file_type=$(file "$input_file" | awk '{print $2}')
+  if [ "$file_type" = "JSON" ]; then
+    length=$(jq -r '. | length' "$input_file")
     for (( i=0; i<length; i++ )); do
-      usernames+=($(jq -r ".[$i].username" "$input_file"))
-      passwords+=($(jq -r ".[$i].password" "$input_file"))
-      shells+=($(jq -r ".[$i].shell" "$input_file"))
-      groups+=($(jq -r ".[$i].groups | join(\",\")" "$input_file"))
+      mapfile -t temp_usernames < <(jq -r ".[$i].username" "$input_file")
+      usernames+=("${temp_usernames[@]}")
+      mapfile -t temp_passwords < <(jq -r ".[$i].password" "$input_file")
+      passwords+=("${temp_passwords[@]}")
+      mapfile -t temp_shells < <(jq -r ".[$i].shell" "$input_file")
+      shells+=("${temp_shells[@]}")
+      mapfile -t temp_groups < <(jq -r ".[$i].groups | join(\",\")" "$input_file")
+      groups+=("${temp_groups[@]}")
     done
   elif [ "$file_type" = "CSV" ] ; then
   # CSV file
-    usernames+=($(awk -F ',' '{print $1}' "$input_file" | tail -n +2))
-    passwords+=($(awk -F ',' '{print $2}' "$input_file" | tail -n +2))
-    shells+=($(awk -F ',' '{print $3}' "$input_file" | tail -n +2))
-    groups+=($(awk -F ',' '{print $4}' "$input_file" | tail -n +2 | tr ' ' ','))
+    mapfile -t temp_usernames < <(awk -F ',' '{print $1}' "$input_file" | tail -n +2)
+    usernames+=("${temp_usernames[@]}")
+    mapfile -t temp_passwords < <(awk -F ',' '{print $2}' "$input_file" | tail -n +2)
+    passwords+=("${temp_passwords[@]}")
+    mapfile -t temp_shells < <(awk -F ',' '{print $3}' "$input_file" | tail -n +2)
+    shells+=("${temp_shells[@]}")
+    mapfile -t temp_groups < <(awk -F ',' '{print $4}' "$input_file" | tail -n +2 | tr ' ' ',')
+    groups+=("${temp_groups[@]}")
   else
     # Invalid file format
     echo >&2 "Error: Invalid file format."
     exit 1
   fi
 done
+
 
 # Determine which users need to be created
 create_usernames=()
@@ -131,16 +140,6 @@ for (( i=0; i<${#usernames[@]}; i++ )); do
   create_passwords+=("$password")
   create_shells+=("$shell")
   create_groups+=("$group")
-  # if ! id "$username" &>/dev/null; then
-  #   # User does not exist
-  #   create_usernames+=("$username")
-  #   create_passwords+=("$password")
-  #   create_shells+=("$shell")
-  #   create_groups+=("$group")
-  # else
-  #   # User already exists
-  #   echo "Warning: user $username already exists."
-  # fi
 done
 
 # Prompt the user whether to continue or not
