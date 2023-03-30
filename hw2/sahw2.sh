@@ -94,29 +94,25 @@ shells=()
 groups=()
 for input_file in "${input_files[@]}"; do
   # Determine file format
-  if grep -q '{' "$input_file"; then
-    # JSON file
-    length=($(jq -r '. | length' data.json))
+  file_type=$(file $input_file | awk '{print $2}')
+  if [ $file_type = "JSON" ]; then
+    length=($(jq -r '. | length' "$input_file"))
     for (( i=0; i<length; i++ )); do
       usernames+=($(jq -r ".[$i].username" "$input_file"))
       passwords+=($(jq -r ".[$i].password" "$input_file"))
       shells+=($(jq -r ".[$i].shell" "$input_file"))
       groups+=($(jq -r ".[$i].groups | join(\",\")" "$input_file"))
     done
-  else
-    is_csv=0
-    if head -n 1 "$input_file" | awk -F, '{ if (NF < 2) exit 1 }' >/dev/null && tail -n +2 "$input_file" | awk -F, '{ if (NF < 2) exit 1 }' >/dev/null ; then
-      is_csv=1
-    fi
-    if [ $is_csv -eq 0 ] ; then
-      echo >&2 "Error: Invalid file format."
-      exit 1
-    fi
-    # CSV file
+  elif [ "$file_type" = "CSV" ] ; then
+  # CSV file
     usernames+=($(awk -F ',' '{print $1}' "$input_file" | tail -n +2))
     passwords+=($(awk -F ',' '{print $2}' "$input_file" | tail -n +2))
     shells+=($(awk -F ',' '{print $3}' "$input_file" | tail -n +2))
-    groups+=($(awk -F ',' '{print $4}' "$input_file" | tail -n +2 | sed 's/^[[:space:]]*//;s/[[:space:]]*$//' | tr ' ' ','))
+    groups+=($(awk -F ',' '{print $4}' "$input_file" | tail -n +2 | tr ' ' ','))
+  else
+    # Invalid file format
+    echo >&2 "Error: Invalid file format."
+    exit 1
   fi
 done
 
@@ -130,16 +126,21 @@ for (( i=0; i<${#usernames[@]}; i++ )); do
   password="${passwords[$i]}"
   shell="${shells[$i]}"
   group="${groups[$i]}"
-  if ! id "$username" &>/dev/null; then
-    # User does not exist
-    create_usernames+=("$username")
-    create_passwords+=("$password")
-    create_shells+=("$shell")
-    create_groups+=("$group")
-  else
-    # User already exists
-    echo "Warning: user $username already exists."
-  fi
+
+  create_usernames+=("$username")
+  create_passwords+=("$password")
+  create_shells+=("$shell")
+  create_groups+=("$group")
+  # if ! id "$username" &>/dev/null; then
+  #   # User does not exist
+  #   create_usernames+=("$username")
+  #   create_passwords+=("$password")
+  #   create_shells+=("$shell")
+  #   create_groups+=("$group")
+  # else
+  #   # User already exists
+  #   echo "Warning: user $username already exists."
+  # fi
 done
 
 # Prompt the user whether to continue or not
@@ -147,31 +148,42 @@ if [[ ${#create_usernames[@]} -eq 0 ]]; then
   echo "No new users to create."
   exit 0
 fi
-echo "This script will create the following user(s): ${create_usernames[*]}"
-read -p "Do you want to continue? [y/n]: " choice
+echo -n "This script will create the following user(s): ${create_usernames[*]} Do you want to continue? [y/n]:"
+read choice
 case "$choice" in
   y|Y )
     for (( i=0; i<${#create_usernames[@]}; i++ )); do
       username="${create_usernames[$i]}"
       password="${create_passwords[$i]}"
       shell="${create_shells[$i]}"
-      group="${create_groups[$i]}"
-      echo "${username} 's group: ${group}"
+      user_groups="${create_groups[$i]}"
+      # if user exist in system then skip
+      if id "$username" &>/dev/null; then
+        echo "Warning: user $username already exists."
+        continue
+      fi
+      # echo "${username} 's group: ${group}"
       # Create user
       sudo pw useradd "$username" -m -s "$shell" -e 0
       echo "$password" | sudo pw mod user "$username" -h 0
-      for group in $(echo "$group" | tr ',' '\n' | awk '{$1=$1};1'); do
+      for group in $(echo "$user_groups" | tr ',' '\n' | awk '{$1=$1};1'); do
         # echo "$username, $group "
-        if ! getent group "$group" &>/dev/null; then
-          sudo pw groupadd "$group"
+        #if group is empty string then continue
+        if [ -z "$group" ]; then
+          continue
         fi
+        #check if user is already in group
+        if id -Gn "$username" | grep -qw "$group"; then
+          continue
+        fi
+        sudo pw groupadd "$group" &>/dev/null
         sudo pw groupmod "$group" -m "$username"
       done
     done
     exit 0
     ;;
   n|N )
-    echo "User chose not to continue."
+    # echo "User chose not to continue."
     exit 0
     ;;
   * )

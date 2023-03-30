@@ -1,0 +1,280 @@
+# BEGIN General/0
+command: "bash sahw2.sh -h"
+stdout: "\nUsage: sahw2.sh {--sha256 hashes ... | --md5 hashes ...} -i files ...\n\n--sha256: SHA256 hashes to validate input files.\n--md5: MD5 hashes to validate input files.\n-i: Input files.\n"
+ansout: "\nUsage: sahw2.sh {--sha256 hashes ... | --md5 hashes ...} -i files ...\n\n--sha256: SHA256 hashes to validate input files.\n--md5: MD5 hashes to validate input files.\n-i: Input files.\n"
+stderr: ""
+anserr: ""
+returncode: 0
+# END General/0
+# BEGIN General/1
+command: "bash sahw2.sh --0c3a --309e --5b34 --9c79 --a4c7"
+stdout: "\nUsage: sahw2.sh {--sha256 hashes ... | --md5 hashes ...} -i files ...\n\n--sha256: SHA256 hashes to validate input files.\n--md5: MD5 hashes to validate input files.\n-i: Input files.\n"
+ansout: "\nUsage: sahw2.sh {--sha256 hashes ... | --md5 hashes ...} -i files ...\n\n--sha256: SHA256 hashes to validate input files.\n--md5: MD5 hashes to validate input files.\n-i: Input files.\n"
+stderr: "Error: Invalid arguments.\n"
+anserr: "Error: Invalid arguments."
+returncode: 1
+# END General/1
+# BEGIN General/2
+command: "bash sahw2.sh --md5 99914b932bd37a50b983c5e7c90ae93b 99914b932bd37a50b983c5e7c90ae93b 99914b932bd37a50b983c5e7c90ae93b -i /tmp/e04b16e1 /tmp/b64729d3"
+stdout: ""
+ansout: ""
+stderr: "Error: Invalid values.\n"
+anserr: "Error: Invalid values."
+returncode: 1
+
+command: "bash sahw2.sh -i /tmp/e04b16e1 /tmp/b64729d3 --md5 99914b932bd37a50b983c5e7c90ae93b 99914b932bd37a50b983c5e7c90ae93b 99914b932bd37a50b983c5e7c90ae93b"
+stdout: ""
+ansout: ""
+stderr: "Error: Invalid values.\n"
+anserr: "Error: Invalid values."
+returncode: 1
+# END General/2
+# BEGIN General/3
+command: "bash sahw2.sh --md5 99914b932bd37a50b983c5e7c90ae93b 99914b932bd37a50b983c5e7c90ae93b --sha256 44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a 44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a -i /tmp/b773ff70 /tmp/d24b4c43 /tmp/69dce2d7 /tmp/51fbad5c"
+stdout: ""
+ansout: ""
+stderr: "Error: Only one type of hash function is allowed.\n"
+anserr: "Error: Only one type of hash function is allowed."
+returncode: 1
+
+command: "bash sahw2.sh -i /tmp/b773ff70 /tmp/d24b4c43 /tmp/69dce2d7 /tmp/51fbad5c --md5 99914b932bd37a50b983c5e7c90ae93b 99914b932bd37a50b983c5e7c90ae93b --sha256 44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a 44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+stdout: ""
+ansout: ""
+stderr: "Error: Only one type of hash function is allowed.\n"
+anserr: "Error: Only one type of hash function is allowed."
+returncode: 1
+# END General/3
+# BEGIN HashValidation/0
+command: "bash sahw2.sh --md5 209fc402a4bf1c52c0bf4b019a9f487c -i /tmp/78645718"
+stdout: ""
+ansout: ""
+stderr: "Error: Invalid checksum.\n"
+anserr: "Error: Invalid checksum."
+returncode: 1
+
+command: "bash sahw2.sh -i /tmp/78645718 --md5 209fc402a4bf1c52c0bf4b019a9f487c"
+stdout: ""
+ansout: ""
+stderr: "Error: Invalid checksum.\n"
+anserr: "Error: Invalid checksum."
+returncode: 1
+
+command: "bash sahw2.sh --sha256 aa0885793662b4e57002c280ab8ab4421de84e4a93ce6b4926780f41c36f79b7 -i /tmp/03ff6a64"
+stdout: ""
+ansout: ""
+stderr: "Error: Invalid checksum.\n"
+anserr: "Error: Invalid checksum."
+returncode: 1
+
+command: "bash sahw2.sh -i /tmp/03ff6a64 --sha256 aa0885793662b4e57002c280ab8ab4421de84e4a93ce6b4926780f41c36f79b7"
+stdout: ""
+ansout: ""
+stderr: "Error: Invalid checksum.\n"
+anserr: "Error: Invalid checksum."
+returncode: 1
+# END HashValidation/0
+# BEGIN HashValidation/1
+['/tmp/32892b75', '/tmp/a9320b38', '/tmp/5f6e68ea', '/tmp/6739eb17']
+# END HashValidation/1
+# BEGIN ParsingFiles/0
+command: "bash sahw2.sh --md5 221747a97391a7b4602169f628999047 e4214ec86d23834a09eb9d45f27558fe -i /tmp/0f3093a6 /tmp/64de62db"
+stdout: "Warning: user root already exists.\nWarning: user root already exists.\nWarning: user root already exists.\nThis script will create the following user(s): gae04057b x44e1441f k7c4b96e3 i1b4a6712 i97bf706d hfea3eb20 fbd706544 u8ad20233 id7f79816 j80625c69 yb9823339 s800101ee ea7c28436 z290e075e i94da638f hf0c7b3fd jae6687c9 e235a358b n2744b901 fc2585426 h8a8cb6db qbd95a677 n6df69d68 q10b7950a k63eb303e m1ef19dff j8c48be79 sa35080fb we696c967 e7324392c j3c94edca yb6e609cc v731f98c9 q603a5b78 c85537920 ac2e1fe28 p6cb974db ua21c28a4 a38b9b9a8 l1631fe90 k1efa569b a3e99cfd2 ve29a3a94 w33d1784c ob4020124 o1c828273 ac2e1fe28 n09df3855 e017d954e g9859d78c h63a1c8ad h60caf58e t6d2b6163 l3ab20403 r9bc59ee2 o96bc09fd ydfdf1e7e sa2620761 qba104bf1 xf6e634aa u582fedb8 v87f0649b rafd22982 a2d6d15c9 wc6ca5d41 i7d6afbd8 n0e30e9f8 x9205b82c wba05c79f s6dfb5e8d o7cabc76a o11c8b534 y0b31f82b ecc0c4b14 o43d9ae05 n97623b1f p16e98a96 l453f09b4 b8f503081 q281321f8 r2c548811 f9e170a3b fa18b8148 lff98a540 m7bd27b71 fc5303931 qf8326d89 ja908c217 g2996bb9f j94a04092 g8fda2952 q8d62ff6d r4913c1ed q60aeea37 s33d2b1e8 tbdbdd08f ce848b7b5 f897bc072 xf8140401 j9d346a40 va4ba5003 h25694d3d qfeff2aa3 u1371dccd i5ea25f3e h8edef717 e592f14fa kd81ea9fa iae203bfb r09eef0c6 g25a5327b zf8667f0c uf00493a6 p76a34c59 qbd95a677 ld18ea9f0 o7b02a2af rc8888bd1 d9a209e86 t7c34a28d r596557c3 bdec8d27b jf339566e ac2e1fe28 r571f14f8 v6059183e beb3c17b6 g2a0d7dda w282355ec t4089d6a1 ddb8d794a x4ea6b039 b8bfeb2e4 u5caab77a o43d9ae05 e7324392c c77218e80 p92471c5a hd181e9d4 m4eef60d4 tb9c28357 ldc9d6de2 nb3558b91\nUser chose not to continue.\n"
+ansout: "This script will create the following user(s): if7516535 y127d19c3 oe67bb8b1 ddb8d794a ec097b577 s2eaedb3c bc444e2fa z056763c6 l1e710bf9 l5f6b6790 i21d99bb0 j20548b03 p57e2122b f6e5d972b z67c03bbe ce0ae6cbc y98794683 gfc5c5d94 od0591687 fad9f649d v72eee2c5 s92bdccb5 te3757cda p0ae88613 z109ca84e ya4c13f56 p51c9ac97 dbc20f99c tb2a12b3d z42c42dc7 p333183b4 f4d133963 mf59aa137 la735cecb z2b7d12ba w282355ec y65be4e39 v11e4f105 y0ceefb86 e82ff306b za6b6d212 u6f7cce59 ddf55e88c he39d7a16 zeebfe33f g43f66d60 k37d98e72 k54aebcd2 rd780d7e4 s7c0322e4 root t37f2405d k676579a4 f0e58796a t37f2405d s83d8c247 j624f7a68 j2e9e3959 i16470f5b ld49edd3b d91c45b12 nb7d58f41 debc11b88 ee7b8282a e58ff83f9 p7fa99937 i73383bbf l9adca8e9 ve1b6e4ad ube487ebc o7e47d22b k22ede565 p7fa99937 r5657d08e r571f14f8 s9616f9cd y645fe181 l7b74a122 nafe180b5 xbbab44e9 na24ae084 xf5ec9bc7 fb9443b7a f922fde9f od23de255 fb7d08e00 n45db0384 t8228376e a808c06cc l5f6b6790 f91ab2a8e e6c4a6903 j861b14a5 db9635f6c w6cd82bf8 zef8ea2fb ob4020124 h2a820b9b j76df16b7 d1d3fba55 h55f71ca3 bf9782b01 z22f7c1dd o0fa8d7c6 n8b3b2655 heedac101 root s4a19a45a j53ee6adc ab0a242d8 l2fffa087 dc77531b1 z42c42dc7 de42fb0c7 o7b02a2af g8b845a48 h403f5d6b w6cd82bf8 kec3551bd g173fb52a cc655b87a kf8accf26 pbfe1b2c2 u733de21e zb819d08c w09bbbaef kf29a11c6 mbd6d5a60 i9752a2bb gae04057b x44e1441f k7c4b96e3 i1b4a6712 i97bf706d hfea3eb20 fbd706544 u8ad20233 id7f79816 j80625c69 yb9823339 s800101ee ea7c28436 z290e075e i94da638f root root hf0c7b3fd jae6687c9 e235a358b n2744b901 fc2585426 h8a8cb6db qbd95a677 n6df69d68 q10b7950a k63eb303e m1ef19dff j8c48be79 sa35080fb we696c967 e7324392c j3c94edca yb6e609cc v731f98c9 q603a5b78 c85537920 ac2e1fe28 p6cb974db ua21c28a4 a38b9b9a8 l1631fe90 k1efa569b a3e99cfd2 ve29a3a94 w33d1784c ob4020124 o1c828273 ac2e1fe28 n09df3855 e017d954e g9859d78c h63a1c8ad h60caf58e t6d2b6163 l3ab20403 r9bc59ee2 o96bc09fd ydfdf1e7e sa2620761 qba104bf1 xf6e634aa u582fedb8 v87f0649b rafd22982 a2d6d15c9 wc6ca5d41 i7d6afbd8 n0e30e9f8 root x9205b82c wba05c79f s6dfb5e8d o7cabc76a o11c8b534 y0b31f82b ecc0c4b14 o43d9ae05 n97623b1f p16e98a96 l453f09b4 b8f503081 q281321f8 r2c548811 f9e170a3b fa18b8148 lff98a540 m7bd27b71 fc5303931 qf8326d89 ja908c217 g2996bb9f j94a04092 g8fda2952 q8d62ff6d r4913c1ed q60aeea37 s33d2b1e8 tbdbdd08f ce848b7b5 f897bc072 xf8140401 j9d346a40 va4ba5003 h25694d3d qfeff2aa3 u1371dccd i5ea25f3e h8edef717 e592f14fa kd81ea9fa iae203bfb r09eef0c6 g25a5327b zf8667f0c uf00493a6 p76a34c59 qbd95a677 ld18ea9f0 o7b02a2af rc8888bd1 d9a209e86 t7c34a28d r596557c3 bdec8d27b jf339566e ac2e1fe28 r571f14f8 v6059183e beb3c17b6 g2a0d7dda w282355ec t4089d6a1 ddb8d794a x4ea6b039 b8bfeb2e4 u5caab77a o43d9ae05 e7324392c c77218e80 p92471c5a hd181e9d4 m4eef60d4 tb9c28357 ldc9d6de2 nb3558b91 Do you want to continue? [y/n]:"
+stderr: "jq: error: Could not open file data.json: No such file or directory\n"
+anserr: ""
+returncode: 0
+# END ParsingFiles/0
+# BEGIN ParsingFiles/1
+command: "bash sahw2.sh --md5 75aa7250406399d0ee6899143a2890dc 01815bd3da1311e82282cc155aa29d44 -i /tmp/aa7c858a /tmp/40091d59"
+id: 
+
+ansid: 
+
+returncode: 0
+
+command: "bash sahw2.sh -i /tmp/aa7c858a /tmp/40091d59 --md5 75aa7250406399d0ee6899143a2890dc 01815bd3da1311e82282cc155aa29d44"
+id: 
+
+ansid: 
+
+returncode: 0
+
+command: "bash sahw2.sh --sha256 66ebd0f1dae7ab24861980292514b5d83a5190c06c4ac086ff159c2171eaf6e2 6f5a9b3e0f50554b8007cfdea14667134bd548b62aa5cae6118c51904c3c0900 -i /tmp/cd9679d1 /tmp/e49bb51c"
+id: 
+
+ansid: 
+
+returncode: 0
+
+command: "bash sahw2.sh -i /tmp/cd9679d1 /tmp/e49bb51c --sha256 66ebd0f1dae7ab24861980292514b5d83a5190c06c4ac086ff159c2171eaf6e2 6f5a9b3e0f50554b8007cfdea14667134bd548b62aa5cae6118c51904c3c0900"
+id: 
+
+ansid: 
+
+returncode: 0
+# END ParsingFiles/1
+# BEGIN ParsingFiles/2
+command: "bash sahw2.sh --md5 d0fcc9f6a0dc4ed8ff6ff762de32a3d3 949d21ea9ae0373f2f103ec5c5176544 -i /tmp/7a294b84 /tmp/5895538b"
+stdout: ""
+ansout: ""
+stderr: "Error: Invalid file format.\n"
+anserr: "Error: Invalid file format."
+id: 
+
+ansid: 
+
+returncode: 1
+
+command: "bash sahw2.sh -i /tmp/7a294b84 /tmp/5895538b --md5 d0fcc9f6a0dc4ed8ff6ff762de32a3d3 949d21ea9ae0373f2f103ec5c5176544"
+stdout: ""
+ansout: ""
+stderr: "Error: Invalid file format.\n"
+anserr: "Error: Invalid file format."
+id: 
+
+ansid: 
+
+returncode: 1
+
+command: "bash sahw2.sh --sha256 f1539711b827bb566aeab15fcba93e496fbeff3df75f6d2d06aae6efd84e2d6d 445151f175066b55ec307710de847de403827370c52d1cf31a76ab427546bc3f -i /tmp/e938f7c0 /tmp/85546b79"
+stdout: ""
+ansout: ""
+stderr: "Error: Invalid file format.\n"
+anserr: "Error: Invalid file format."
+id: 
+
+ansid: 
+
+returncode: 1
+
+command: "bash sahw2.sh -i /tmp/e938f7c0 /tmp/85546b79 --sha256 f1539711b827bb566aeab15fcba93e496fbeff3df75f6d2d06aae6efd84e2d6d 445151f175066b55ec307710de847de403827370c52d1cf31a76ab427546bc3f"
+stdout: ""
+ansout: ""
+stderr: "Error: Invalid file format.\n"
+anserr: "Error: Invalid file format."
+id: 
+
+ansid: 
+
+returncode: 1
+# END ParsingFiles/2
+# BEGIN CreateUsers/0
+command: "bash sahw2.sh --md5 923e4519ed06a1abefa19ea9faae56fb af09d0aea091f98302b23a55401bcd75 -i /tmp/a90dd6f4 /tmp/3990637b"
+stdout: "Warning: user root already exists.\nThis script will create the following user(s): n034a82c0 cc49b9811 xbcff7388 z6a58ff50 wfe1635b0 t5ba1615f z6a58ff50 i22717a40 s0ed6648e h4ab67405\nn034a82c0 's group: z9dca03c4\ncc49b9811 's group: x3502391e,u2c30aacc,v117feb4a,z9dca03c4,i36d3d736\nxbcff7388 's group: z0d2436ce\nz6a58ff50 's group: p04dad112,ce7bcb36d\nwfe1635b0 's group: l9aab2017\nt5ba1615f 's group: abc4ed0f8,ce7bcb36d,vc61c3df5,u2c30aacc\nz6a58ff50 's group: \ni22717a40 's group: \ns0ed6648e 's group: \nh4ab67405 's group: \n"
+ansoutregex: "(.|\r|\n)*Warning: user root already exists.\nWarning: user g52c4ab21 already exists.\nWarning: user root already exists.\nWarning: user z6a58ff50 already exists.$"
+stderr: "jq: error: Could not open file data.json: No such file or directory\npw: login name `z6a58ff50' already exists\n"
+anserr: ""
+returncode: 0
+
+command: "bash sahw2.sh -i /tmp/a90dd6f4 /tmp/3990637b --md5 923e4519ed06a1abefa19ea9faae56fb af09d0aea091f98302b23a55401bcd75"
+stdout: "Warning: user root already exists.\nThis script will create the following user(s): n034a82c0 cc49b9811 xbcff7388 z6a58ff50 wfe1635b0 t5ba1615f z6a58ff50 i22717a40 s0ed6648e h4ab67405\nn034a82c0 's group: z9dca03c4\ncc49b9811 's group: x3502391e,u2c30aacc,v117feb4a,z9dca03c4,i36d3d736\nxbcff7388 's group: z0d2436ce\nz6a58ff50 's group: p04dad112,ce7bcb36d\nwfe1635b0 's group: l9aab2017\nt5ba1615f 's group: abc4ed0f8,ce7bcb36d,vc61c3df5,u2c30aacc\nz6a58ff50 's group: \ni22717a40 's group: \ns0ed6648e 's group: \nh4ab67405 's group: \n"
+ansoutregex: "(.|\r|\n)*Warning: user root already exists.\nWarning: user g52c4ab21 already exists.\nWarning: user root already exists.\nWarning: user z6a58ff50 already exists.$"
+stderr: "jq: error: Could not open file data.json: No such file or directory\npw: login name `z6a58ff50' already exists\n"
+anserr: ""
+returncode: 0
+
+command: "bash sahw2.sh --sha256 86f34cec89aa7f7af6865f8446f8a19eb434a527a6099439548711b9cd2ee3de 1cfcb18ad05e2e57eb7ce9017b583ad0fed52ff99f3f3975bc492b4e57160607 -i /tmp/6edc9f15 /tmp/dcadc574"
+stdout: "Warning: user root already exists.\nWarning: user root already exists.\nThis script will create the following user(s): ef729d30f ob77c52a0 m31653362 r895bc0b1 nc2ba0192 r6233d55b b472da168 ybeb661ab qeba0efdb m61e4a8ba g1ebcf47f xf919ca65 b1b95b980 z74c81da6 ta4443d7b gb97f576e y664616cd z4786905c yb733ac47 he6965a4f tf159e005\nef729d30f 's group: z2c39157e,aa7011666\nob77c52a0 's group: s2b242666\nm31653362 's group: pa350c131,d56494b69,y77a4c795\nr895bc0b1 's group: ed50b60f9,vff6f4142,pa350c131,i5a95a5fa,re7428a85\nnc2ba0192 's group: vff6f4142,ddfe4fee3,y77a4c795,q813a21ab,a64d5b6a3\nr6233d55b 's group: a64d5b6a3,s2b242666\nb472da168 's group: i5a95a5fa,u712249e4,h254e3b2f\nybeb661ab 's group: z2c39157e,aa7011666,pa350c131\nqeba0efdb 's group: pa350c131,mc8683c45,s2b242666\nm61e4a8ba 's group: q813a21ab,aa7011666\ng1ebcf47f 's group: qc39d24f5,i5a95a5fa,mc8683c45,kab861105,a64d5b6a3\nxf919ca65 's group: y77a4c795,d56494b69,aa7011666,vff6f4142\nb1b95b980 's group: i5a95a5fa\nz74c81da6 's group: mc8683c45\nta4443d7b 's group: y77a4c795,aa7011666,vff6f4142,z2c39157e,pa350c131\ngb97f576e 's group: y77a4c795,qc39d24f5,u712249e4,mc8683c45\ny664616cd 's group: \nz4786905c 's group: \nyb733ac47 's group: \nhe6965a4f 's group: \ntf159e005 's group: \n"
+ansoutregex: "(.|\r|\n)*Warning: user root already exists.\nWarning: user root already exists.\nWarning: user z4786905c already exists.\nWarning: user root already exists.\nWarning: user root already exists.\nWarning: user z4786905c already exists.$"
+stderr: "jq: error: Could not open file data.json: No such file or directory\n"
+anserr: ""
+returncode: 0
+
+command: "bash sahw2.sh -i /tmp/6edc9f15 /tmp/dcadc574 --sha256 86f34cec89aa7f7af6865f8446f8a19eb434a527a6099439548711b9cd2ee3de 1cfcb18ad05e2e57eb7ce9017b583ad0fed52ff99f3f3975bc492b4e57160607"
+stdout: "Warning: user root already exists.\nWarning: user root already exists.\nThis script will create the following user(s): ef729d30f ob77c52a0 m31653362 r895bc0b1 nc2ba0192 r6233d55b b472da168 ybeb661ab qeba0efdb m61e4a8ba g1ebcf47f xf919ca65 b1b95b980 z74c81da6 ta4443d7b gb97f576e y664616cd z4786905c yb733ac47 he6965a4f tf159e005\nef729d30f 's group: z2c39157e,aa7011666\nob77c52a0 's group: s2b242666\nm31653362 's group: pa350c131,d56494b69,y77a4c795\nr895bc0b1 's group: ed50b60f9,vff6f4142,pa350c131,i5a95a5fa,re7428a85\nnc2ba0192 's group: vff6f4142,ddfe4fee3,y77a4c795,q813a21ab,a64d5b6a3\nr6233d55b 's group: a64d5b6a3,s2b242666\nb472da168 's group: i5a95a5fa,u712249e4,h254e3b2f\nybeb661ab 's group: z2c39157e,aa7011666,pa350c131\nqeba0efdb 's group: pa350c131,mc8683c45,s2b242666\nm61e4a8ba 's group: q813a21ab,aa7011666\ng1ebcf47f 's group: qc39d24f5,i5a95a5fa,mc8683c45,kab861105,a64d5b6a3\nxf919ca65 's group: y77a4c795,d56494b69,aa7011666,vff6f4142\nb1b95b980 's group: i5a95a5fa\nz74c81da6 's group: mc8683c45\nta4443d7b 's group: y77a4c795,aa7011666,vff6f4142,z2c39157e,pa350c131\ngb97f576e 's group: y77a4c795,qc39d24f5,u712249e4,mc8683c45\ny664616cd 's group: \nz4786905c 's group: \nyb733ac47 's group: \nhe6965a4f 's group: \ntf159e005 's group: \n"
+ansoutregex: "(.|\r|\n)*Warning: user root already exists.\nWarning: user root already exists.\nWarning: user z4786905c already exists.\nWarning: user root already exists.\nWarning: user root already exists.\nWarning: user z4786905c already exists.$"
+stderr: "jq: error: Could not open file data.json: No such file or directory\n"
+anserr: ""
+returncode: 0
+
+command: "bash sahw2.sh --md5 79b2b37f12b58b6125181c87a9178d62 b8586c0ea6e4e49b0172f69d5ec28d29 -i /tmp/9383c449 /tmp/72f36cb7"
+stdout: "Warning: user root already exists.\nWarning: user root already exists.\nWarning: user root already exists.\nWarning: user root already exists.\nThis script will create the following user(s): l23f9d145 j1decea47 i18e55a66 ib5c99fa0 l8dea8dc9 p4979a8bb y0fbfdbd4 nebfb6d4e k24f34f2e k387af79b td2255b0d i34142684 h0692c04a gbf0cd017 h0692c04a l4a24fe2f g3d0e391c o5473262c x4de223e9 n56200df0 n056379e4 l23f9d145 v71f622ea cae81b4bf o346d0752 cba926e42 t4fb4df1f t33753c65 hf1f5b0c8 g9944adcb w6674be35 d6d11cf49 w2ece9f8b x802ae18b e06d85b6c m6314708a f647b110b r6408fd4d m6e8fb688 e24a2d3ab h13fb5831 y927f4fa6 q8cfae737 h2881eb81 je9e09684 zc5c0a388 p1ebf5c35 hb8f9d8db y44521409 jfe0d09d9 m4f3bc5e1 t6ddc9c5c iff8f4794 q6e09d8cc o6f9b0688 fed37bd3d r95e8c12a v4297d4eb b28844801 fab916208 u44242533 ca15ee45e w524ef17b zf0ab45e3 uab22db1b z7ed16eb8 c2dad8267 b2dd6c560 jab5aeaf4 x8a52f3d7 j180855db h11d2d9da ta46e2dd6 s5d11c6a8 o238a9d14 ee1c2059b h82e4ae2a h04e7b8e0 qae8a0419 h8bd9d7fe c663da296 u7d094ea6 a01c6d4dc q7ab072fc zfdd97737 s24576c15 gcecc4efc cf17c02af h2dc64d3e x956acf33 w253b95d1 h38cc310f af15af25d y6cb1b5f8 ud5ed028b ba2eb376d nd1ad5323 hb1c9bcf2 q212d2e50 w4dfdc4fa maf945830 t769364a6 wbd115a3e pbe2a9e52 r506eeae4 g603f38be e0189b8dd\nl23f9d145 's group: uae32f500\nj1decea47 's group: dad5682e8,n67fbe89f\ni18e55a66 's group: w0c461943,r4f341b9f\nib5c99fa0 's group: d996bddba,k8d85f28f,w0c461943\nl8dea8dc9 's group: k8d85f28f,n67fbe89f,xd30f82ee,uae32f500\np4979a8bb 's group: xd30f82ee,a8e22e59a,z75de039b\ny0fbfdbd4 's group: n67fbe89f,z75de039b\nnebfb6d4e 's group: kf25d1f5a,z75de039b,n67fbe89f,ifcd9704f,k8d85f28f\nk24f34f2e 's group: c2865dbb3,r4f341b9f\nk387af79b 's group: x452b8f8c,d996bddba\ntd2255b0d 's group: ldbe58d60\ni34142684 's group: d996bddba\nh0692c04a 's group: xd30f82ee\ngbf0cd017 's group: d996bddba,c2865dbb3,uae32f500,ldbe58d60,kf25d1f5a\nh0692c04a 's group: ifcd9704f,c2865dbb3,dad5682e8,kf25d1f5a,d996bddba\nl4a24fe2f 's group: w0c461943,r4f341b9f,a8e22e59a\ng3d0e391c 's group: kf25d1f5a,dad5682e8,c2865dbb3\no5473262c 's group: uae32f500,ldbe58d60,kf25d1f5a,k8d85f28f\nx4de223e9 's group: ldbe58d60,w0c461943,n67fbe89f,d996bddba\nn56200df0 's group: n67fbe89f,ifcd9704f,kf25d1f5a,xd30f82ee\nn056379e4 's group: c2865dbb3,d996bddba,k8d85f28f,xd30f82ee\nl23f9d145 's group: d996bddba,kf25d1f5a\nv71f622ea 's group: n67fbe89f,ldbe58d60\ncae81b4bf 's group: n67fbe89f,w0c461943,a8e22e59a,uae32f500\no346d0752 's group: xd30f82ee,k8d85f28f,n67fbe89f\ncba926e42 's group: ifcd9704f,dad5682e8,c2865dbb3\nt4fb4df1f 's group: ldbe58d60,x452b8f8c,ifcd9704f\nt33753c65 's group: n67fbe89f,dad5682e8,z75de039b\nhf1f5b0c8 's group: x452b8f8c,ldbe58d60,ifcd9704f\ng9944adcb 's group: ldbe58d60,x452b8f8c,uae32f500,xd30f82ee,w0c461943\nw6674be35 's group: xd30f82ee,dad5682e8,k8d85f28f,ldbe58d60\nd6d11cf49 's group: w0c461943\nw2ece9f8b 's group: xd30f82ee,z75de039b,kf25d1f5a,r4f341b9f\nx802ae18b 's group: d996bddba\ne06d85b6c 's group: r4f341b9f,ifcd9704f\nm6314708a 's group: w0c461943,a8e22e59a,d996bddba,x452b8f8c,dad5682e8\nf647b110b 's group: w0c461943,k8d85f28f,x452b8f8c\nr6408fd4d 's group: r4f341b9f\nm6e8fb688 's group: kf25d1f5a,c2865dbb3,z75de039b,k8d85f28f,d996bddba\ne24a2d3ab 's group: c2865dbb3,xd30f82ee,k8d85f28f\nh13fb5831 's group: ldbe58d60,uae32f500,a8e22e59a,kf25d1f5a,r4f341b9f\ny927f4fa6 's group: k8d85f28f,a8e22e59a,z75de039b,kf25d1f5a\nq8cfae737 's group: dad5682e8,x452b8f8c\nh2881eb81 's group: dad5682e8,n67fbe89f,kf25d1f5a,uae32f500,ifcd9704f\nje9e09684 's group: ldbe58d60,kf25d1f5a,k8d85f28f\nzc5c0a388 's group: a8e22e59a,c2865dbb3,ifcd9704f,ldbe58d60,k8d85f28f\np1ebf5c35 's group: xd30f82ee\nhb8f9d8db 's group: ldbe58d60\ny44521409 's group: a8e22e59a,d996bddba\njfe0d09d9 's group: n67fbe89f,a8e22e59a,xd30f82ee,kf25d1f5a\nm4f3bc5e1 's group: ifcd9704f,r4f341b9f\nt6ddc9c5c 's group: uae32f500,xd30f82ee,w0c461943,dad5682e8\niff8f4794 's group: r4f341b9f,x452b8f8c\nq6e09d8cc 's group: x452b8f8c,n67fbe89f,ldbe58d60,kf25d1f5a\no6f9b0688 's group: ldbe58d60,r4f341b9f\nfed37bd3d 's group: d996bddba\nr95e8c12a 's group: k8d85f28f,uae32f500\nv4297d4eb 's group: a8e22e59a,ldbe58d60,z75de039b\nb28844801 's group: w0c461943\nfab916208 's group: d996bddba,a8e22e59a\nu44242533 's group: r4f341b9f,xd30f82ee,x452b8f8c\nca15ee45e 's group: w0c461943\nw524ef17b 's group: dad5682e8,c2865dbb3,n67fbe89f\nzf0ab45e3 's group: n67fbe89f,xd30f82ee\nuab22db1b 's group: x452b8f8c,n67fbe89f,d996bddba\nz7ed16eb8 's group: w0c461943\nc2dad8267 's group: n67fbe89f,ldbe58d60,a8e22e59a,dad5682e8\nb2dd6c560 's group: n67fbe89f,d996bddba,k8d85f28f\njab5aeaf4 's group: ifcd9704f,k8d85f28f,x452b8f8c\nx8a52f3d7 's group: n67fbe89f,z75de039b\nj180855db 's group: k8d85f28f,dad5682e8,a8e22e59a,x452b8f8c,ifcd9704f\nh11d2d9da 's group: x452b8f8c,ifcd9704f,uae32f500,c2865dbb3,dad5682e8\nta46e2dd6 's group: d996bddba,dad5682e8,ifcd9704f,x452b8f8c,uae32f500\ns5d11c6a8 's group: w0c461943\no238a9d14 's group: r4f341b9f,c2865dbb3,n67fbe89f,x452b8f8c,k8d85f28f\nee1c2059b 's group: dad5682e8,w0c461943,kf25d1f5a,ifcd9704f,k8d85f28f\nh82e4ae2a 's group: uae32f500,ldbe58d60,w0c461943,ifcd9704f\nh04e7b8e0 's group: kf25d1f5a,dad5682e8,k8d85f28f\nqae8a0419 's group: ifcd9704f,z75de039b,k8d85f28f\nh8bd9d7fe 's group: n67fbe89f,ldbe58d60\nc663da296 's group: k8d85f28f,kf25d1f5a,z75de039b,n67fbe89f,r4f341b9f\nu7d094ea6 's group: w0c461943,c2865dbb3,r4f341b9f,d996bddba,n67fbe89f\na01c6d4dc 's group: kf25d1f5a,k8d85f28f\nq7ab072fc 's group: ldbe58d60,ifcd9704f,xd30f82ee,d996bddba,n67fbe89f\nzfdd97737 's group: z75de039b,ldbe58d60,dad5682e8,c2865dbb3,d996bddba\ns24576c15 's group: c2865dbb3,z75de039b,d996bddba,xd30f82ee,r4f341b9f\ngcecc4efc 's group: a8e22e59a,w0c461943,d996bddba,c2865dbb3,ldbe58d60\ncf17c02af 's group: d996bddba,uae32f500,x452b8f8c,k8d85f28f,kf25d1f5a\nh2dc64d3e 's group: n67fbe89f,xd30f82ee,a8e22e59a\nx956acf33 's group: ldbe58d60,d996bddba,ifcd9704f,x452b8f8c,c2865dbb3\nw253b95d1 's group: w0c461943\nh38cc310f 's group: \naf15af25d 's group: \ny6cb1b5f8 's group: \nud5ed028b 's group: \nba2eb376d 's group: \nnd1ad5323 's group: \nhb1c9bcf2 's group: \nq212d2e50 's group: \nw4dfdc4fa 's group: \nmaf945830 's group: \nt769364a6 's group: \nwbd115a3e 's group: \npbe2a9e52 's group: \nr506eeae4 's group: \ng603f38be 's group: \ne0189b8dd 's group: \n"
+ansoutregex: "(.|\r|\n)*Warning: user root already exists.\nWarning: user o10f97cb9 already exists.\nWarning: user x73e6a30e already exists.\nWarning: user fadd75bb6 already exists.\nWarning: user h0692c04a already exists.\nWarning: user l23f9d145 already exists.\nWarning: user root already exists.\nWarning: user root already exists.\nWarning: user v4297d4eb already exists.\nWarning: user root already exists.\nWarning: user root already exists.$"
+stderr: "jq: error: Could not open file data.json: No such file or directory\npw: login name `h0692c04a' already exists\npw: login name `l23f9d145' already exists\n"
+anserr: ""
+returncode: 0
+# END CreateUsers/0
+# BEGIN CreateUsers/1
+command: "id <user>"
+id: 
+uid=10005(n034a82c0) gid=10005(n034a82c0) groups=10005(n034a82c0),10007(z9dca03c4)
+uid=10006(cc49b9811) gid=10008(cc49b9811) groups=10008(cc49b9811),10007(z9dca03c4),10009(x3502391e),10010(u2c30aacc),10011(v117feb4a),10012(i36d3d736)
+uid=10007(xbcff7388) gid=10013(xbcff7388) groups=10013(xbcff7388),10014(z0d2436ce)
+uid=10008(z6a58ff50) gid=10015(z6a58ff50) groups=10015(z6a58ff50),10016(p04dad112),10017(ce7bcb36d)
+uid=10009(wfe1635b0) gid=10018(wfe1635b0) groups=10018(wfe1635b0),10019(l9aab2017)
+uid=10010(t5ba1615f) gid=10020(t5ba1615f) groups=10020(t5ba1615f),10010(u2c30aacc),10017(ce7bcb36d),10021(abc4ed0f8),10022(vc61c3df5)
+uid=10011(i22717a40) gid=10023(i22717a40) groups=10023(i22717a40)
+uid=10012(s0ed6648e) gid=10024(s0ed6648e) groups=10024(s0ed6648e)
+uid=10013(h4ab67405) gid=10025(h4ab67405) groups=10025(h4ab67405)
+
+ansidregex: 
+uid=\d+\(g52c4ab21\) gid=\d+\(g52c4ab21\) groups=\d+\((h76e79561|u2c30aacc|pbfd597be|l44735047|p04dad112|g52c4ab21)\),\d+\((h76e79561|u2c30aacc|pbfd597be|l44735047|p04dad112|g52c4ab21)\),\d+\((h76e79561|u2c30aacc|pbfd597be|l44735047|p04dad112|g52c4ab21)\),\d+\((h76e79561|u2c30aacc|pbfd597be|l44735047|p04dad112|g52c4ab21)\),\d+\((h76e79561|u2c30aacc|pbfd597be|l44735047|p04dad112|g52c4ab21)\),\d+\((h76e79561|u2c30aacc|pbfd597be|l44735047|p04dad112|g52c4ab21)\)
+uid=\d+\(ac39df652\) gid=\d+\(ac39df652\) groups=\d+\((pbfd597be|abc4ed0f8|l9aab2017|i36d3d736|x3502391e|ac39df652)\),\d+\((pbfd597be|abc4ed0f8|l9aab2017|i36d3d736|x3502391e|ac39df652)\),\d+\((pbfd597be|abc4ed0f8|l9aab2017|i36d3d736|x3502391e|ac39df652)\),\d+\((pbfd597be|abc4ed0f8|l9aab2017|i36d3d736|x3502391e|ac39df652)\),\d+\((pbfd597be|abc4ed0f8|l9aab2017|i36d3d736|x3502391e|ac39df652)\),\d+\((pbfd597be|abc4ed0f8|l9aab2017|i36d3d736|x3502391e|ac39df652)\)
+uid=\d+\(a4116d91b\) gid=\d+\(a4116d91b\) groups=\d+\((w2b5bf1b8|a4116d91b)\),\d+\((w2b5bf1b8|a4116d91b)\)
+uid=\d+\(n668735b8\) gid=\d+\(n668735b8\) groups=\d+\((pbfd597be|w2b5bf1b8|n668735b8)\),\d+\((pbfd597be|w2b5bf1b8|n668735b8)\),\d+\((pbfd597be|w2b5bf1b8|n668735b8)\)
+uid=\d+\(l152981ff\) gid=\d+\(l152981ff\) groups=\d+\((pbfd597be|l44735047|l9aab2017|x3502391e|z9dca03c4|l152981ff)\),\d+\((pbfd597be|l44735047|l9aab2017|x3502391e|z9dca03c4|l152981ff)\),\d+\((pbfd597be|l44735047|l9aab2017|x3502391e|z9dca03c4|l152981ff)\),\d+\((pbfd597be|l44735047|l9aab2017|x3502391e|z9dca03c4|l152981ff)\),\d+\((pbfd597be|l44735047|l9aab2017|x3502391e|z9dca03c4|l152981ff)\),\d+\((pbfd597be|l44735047|l9aab2017|x3502391e|z9dca03c4|l152981ff)\)
+uid=\d+\(bc6c6a109\) gid=\d+\(bc6c6a109\) groups=\d+\((abc4ed0f8|ce7bcb36d|bc6c6a109)\),\d+\((abc4ed0f8|ce7bcb36d|bc6c6a109)\),\d+\((abc4ed0f8|ce7bcb36d|bc6c6a109)\)
+uid=\d+\(q913bb01f\) gid=\d+\(q913bb01f\) groups=\d+\((x3502391e|v117feb4a|q913bb01f)\),\d+\((x3502391e|v117feb4a|q913bb01f)\),\d+\((x3502391e|v117feb4a|q913bb01f)\)
+uid=\d+\(bae9e2368\) gid=\d+\(bae9e2368\) groups=\d+\((bae9e2368)\)
+uid=\d+\(odaad37e5\) gid=\d+\(odaad37e5\) groups=\d+\((odaad37e5)\)
+uid=\d+\(n034a82c0\) gid=\d+\(n034a82c0\) groups=\d+\((n034a82c0)\)
+uid=\d+\(cc49b9811\) gid=\d+\(cc49b9811\) groups=\d+\((z9dca03c4|cc49b9811)\),\d+\((z9dca03c4|cc49b9811)\)
+uid=\d+\(xbcff7388\) gid=\d+\(xbcff7388\) groups=\d+\((u2c30aacc|pbfd597be|xbcff7388)\),\d+\((u2c30aacc|pbfd597be|xbcff7388)\),\d+\((u2c30aacc|pbfd597be|xbcff7388)\)
+uid=\d+\(z6a58ff50\) gid=\d+\(z6a58ff50\) groups=\d+\((z0d2436ce|z6a58ff50)\),\d+\((z0d2436ce|z6a58ff50)\)
+uid=\d+\(wfe1635b0\) gid=\d+\(wfe1635b0\) groups=\d+\((p04dad112|ce7bcb36d|wfe1635b0)\),\d+\((p04dad112|ce7bcb36d|wfe1635b0)\),\d+\((p04dad112|ce7bcb36d|wfe1635b0)\)
+uid=\d+\(t5ba1615f\) gid=\d+\(t5ba1615f\) groups=\d+\((l9aab2017|t5ba1615f)\),\d+\((l9aab2017|t5ba1615f)\)
+uid=\d+\(i22717a40\) gid=\d+\(i22717a40\) groups=\d+\((i22717a40)\)
+uid=\d+\(s0ed6648e\) gid=\d+\(s0ed6648e\) groups=\d+\((s0ed6648e)\)
+uid=\d+\(h4ab67405\) gid=\d+\(h4ab67405\) groups=\d+\((abc4ed0f8|ce7bcb36d|vc61c3df5|u2c30aacc|h4ab67405)\),\d+\((abc4ed0f8|ce7bcb36d|vc61c3df5|u2c30aacc|h4ab67405)\),\d+\((abc4ed0f8|ce7bcb36d|vc61c3df5|u2c30aacc|h4ab67405)\),\d+\((abc4ed0f8|ce7bcb36d|vc61c3df5|u2c30aacc|h4ab67405)\),\d+\((abc4ed0f8|ce7bcb36d|vc61c3df5|u2c30aacc|h4ab67405)\)
+command: "getent passwd <user>"
+getent: 
+
+ansgetentregex: 
+g52c4ab21:.*:\d+:\d+:.*:.*:/bin/sh
+ac39df652:.*:\d+:\d+:.*:.*:/usr/local/bin/bash
+a4116d91b:.*:\d+:\d+:.*:.*:/usr/local/bin/bash
+n668735b8:.*:\d+:\d+:.*:.*:/bin/sh
+l152981ff:.*:\d+:\d+:.*:.*:/bin/csh
+bc6c6a109:.*:\d+:\d+:.*:.*:/bin/csh
+q913bb01f:.*:\d+:\d+:.*:.*:/bin/sh
+bae9e2368:.*:\d+:\d+:.*:.*:/bin/tcsh
+odaad37e5:.*:\d+:\d+:.*:.*:/bin/sh
+n034a82c0:.*:\d+:\d+:.*:.*:/bin/tcsh
+cc49b9811:.*:\d+:\d+:.*:.*:/bin/sh
+xbcff7388:.*:\d+:\d+:.*:.*:/usr/local/bin/bash
+z6a58ff50:.*:\d+:\d+:.*:.*:/usr/local/bin/bash
+wfe1635b0:.*:\d+:\d+:.*:.*:/usr/local/bin/bash
+t5ba1615f:.*:\d+:\d+:.*:.*:/bin/sh
+i22717a40:.*:\d+:\d+:.*:.*:/bin/csh
+s0ed6648e:.*:\d+:\d+:.*:.*:/bin/sh
+h4ab67405:.*:\d+:\d+:.*:.*:/usr/local/bin/bash
+# END CreateUsers/1
+# BEGIN CreateUsers/2
+command: "su <user> -c whoami"
+stdout: 
+t5ba1615f
+
+
+
+
+
+
+
+stderr: 
+Warning: Permanently added 'localhost.localdomain' (ED25519) to the list of known hosts.
+
+Warning: Permanently added 'localhost.localdomain' (ED25519) to the list of known hosts.
+Permission denied, please try again.
+
+Warning: Permanently added 'localhost.localdomain' (ED25519) to the list of known hosts.
+Permission denied, please try again.
+
+Warning: Permanently added 'localhost.localdomain' (ED25519) to the list of known hosts.
+Permission denied, please try again.
+
+Warning: Permanently added 'localhost.localdomain' (ED25519) to the list of known hosts.
+Permission denied, please try again.
+
+Warning: Permanently added 'localhost.localdomain' (ED25519) to the list of known hosts.
+Permission denied, please try again.
+# END CreateUsers/2

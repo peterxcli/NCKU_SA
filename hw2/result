@@ -1,0 +1,73 @@
+{
+    "score": 70,
+    "results": {
+        "General": [
+            {
+                "message": "Provide -h option to show the help message.",
+                "ans": true,
+                "weight": "14"
+            },
+            {
+                "message": "Invalid arguments should be rejected with a non-zero status code, with the error message and help message.",
+                "ans": true,
+                "weight": "14"
+            },
+            {
+                "message": "The number of hash strings should match the number of files provided.",
+                "ans": true,
+                "weight": "6"
+            },
+            {
+                "message": "Shell script received two types of hashed value it should be rejected with non-zero status code with the error message.",
+                "ans": true,
+                "weight": "6"
+            }
+        ],
+        "HashValidation": [
+            {
+                "message": "checksum doesn't match the input hash, return with a non-zero status code with the error message (single file).",
+                "ans": true,
+                "weight": "10"
+            },
+            {
+                "message": "checksum doesn't match the input hashes, return with a non-zero status code with the error message (multi file).",
+                "ans": true,
+                "weight": "5"
+            }
+        ],
+        "ParsingFiles": [
+            {
+                "message": "Print out all username in the files.",
+                "ans": false,
+                "weight": "10"
+            },
+            {
+                "message": "If the user presses \"n\" or Enter, the script will exit with zero status code.",
+                "ans": true,
+                "weight": "10"
+            },
+            {
+                "message": "Invalid file format or contents should be rejected with a non-zero status code, with the error message.",
+                "ans": true,
+                "weight": "5"
+            }
+        ],
+        "CreateUsers": [
+            {
+                "message": "Skip users if they are already created or exist in the OS and print the warning message.",
+                "ans": false,
+                "weight": "10"
+            },
+            {
+                "message": "Users information are correct.",
+                "ans": false,
+                "weight": "5"
+            },
+            {
+                "message": "Users can login",
+                "ans": false,
+                "weight": "5"
+            }
+        ]
+    }
+}
